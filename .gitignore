@@ -1,0 +1,19 @@
+/.claude
+/.claude-flow
+/.remember
+/ruvector.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Datasets and models
+**/data/loan.csv
+*.joblib
+
+# OS files
+.DS_Store
