@@ -287,7 +287,7 @@
 
             // Get custom API URL from localStorage or fallback to default
             const savedUrl = localStorage.getItem('loan_prediction_api_url');
-            const baseUrl = savedUrl ? savedUrl.trim() : "https://loan-prediction-system-nuv7.onrender.com";
+            const baseUrl = savedUrl ? savedUrl.trim() : "https://loan-prediction-system-dol7.onrender.com";
             const API_URL = `${baseUrl.replace(/\/$/, '')}/predict`;
 
             try {
@@ -355,7 +355,7 @@
         const saveSettingsBtn = document.getElementById('saveSettingsBtn');
 
         // Initialize input value
-        const currentUrl = localStorage.getItem('loan_prediction_api_url') || "https://loan-prediction-system-nuv7.onrender.com";
+        const currentUrl = localStorage.getItem('loan_prediction_api_url') || "https://loan-prediction-system-dol7.onrender.com";
         apiUrlInput.value = currentUrl;
 
         toggleBtn.addEventListener('click', () => {
