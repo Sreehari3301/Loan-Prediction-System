@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.git/
+.github/
+data/
+README.md
+loan_prediction_system_architecture.png
