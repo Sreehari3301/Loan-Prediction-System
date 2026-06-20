@@ -7,7 +7,7 @@ import os
 import sys
 
 try:
-    from main import predict_single
+    from main import predict_single, load_model_safe
 except ImportError:
     sys.exit(1)
 
@@ -31,7 +31,7 @@ def load_models():
     }
     for task, path in paths.items():
         if os.path.exists(path):
-            MODELS[task] = joblib.load(path)
+            MODELS[task] = load_model_safe(path)
 
 class LoanApplication(BaseModel):
     task: str
