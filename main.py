@@ -253,6 +253,24 @@ def build_loan_prediction_system(dataset_path: str, task: str = 'regression', sa
         
     return model_pipeline, metrics
 
+def load_model_safe(model_path: str):
+    """
+    Loads a joblib model and patches any missing attributes (like multi_class in LogisticRegression)
+    to prevent version incompatibility errors between different scikit-learn versions.
+    """
+    model = joblib.load(model_path)
+    
+    # Try to patch LogisticRegression's deprecated/removed multi_class attribute if it's missing
+    try:
+        if hasattr(model, 'named_steps') and 'classifier' in model.named_steps:
+            clf = model.named_steps['classifier']
+            if clf and not hasattr(clf, 'multi_class'):
+                clf.multi_class = 'auto'
+    except Exception:
+        pass
+        
+    return model
+
 def predict_single(model_pipeline, input_dict: dict, task: str = 'regression') -> dict:
     """
     Predicts for a single input dictionary.
@@ -415,7 +433,7 @@ def main():
             sys.exit(1)
             
         try:
-            model = joblib.load(args.model)
+            model = load_model_safe(args.model)
             print("[+] Model loaded successfully.")
         except Exception as e:
             print(f"[!] Error loading model: {e}")
